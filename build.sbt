@@ -18,3 +18,6 @@ addSbtPlugin("com.geirsson"       % "sbt-scalafmt" % "1.6.0-RC3")
 addSbtPlugin("pl.project13.scala" % "sbt-jmh"      % "0.3.3")
 
 scalafmtOnCompile := true
+
+// Wart remover settings
+wartremoverWarnings in (Compile, compile) ++= Warts.unsafe
