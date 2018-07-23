@@ -1,7 +1,10 @@
 package scalaz.build
 
-import sbt._, Keys._
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport.scalafmtOnCompile
+import sbt.Keys._
+import sbt._
+import wartremover.WartRemover.autoImport._
+import wartremover.{Wart, Warts}
 
 object Compilation {
 
@@ -23,9 +26,9 @@ object Compilation {
     ),
     libraryDependencies ++= compilerPlugins ++ Seq(
       "com.github.ghik" %% "silencer-lib" % silencerVersion % Provided,
-      "org.scalacheck"  %% "scalacheck"   % "1.14.0"        % Test
+      "org.scalacheck" %% "scalacheck" % "1.14.0" % Test
     )
-  )
+  ) ++ wartSettings
 
   val silencerVersion = "1.0"
 
@@ -72,6 +75,10 @@ object Compilation {
     "-Ywarn-value-discard" // Warn when non-Unit expression results are unused.
   )
 
+  lazy val wartSettings: Seq[Def.Setting[Seq[Wart]]] = Seq(
+    wartremoverWarnings in Compile ++= Warts.unsafe
+  )
+
   def crossScalacOptions(version: String): Seq[String] =
     CrossVersion.partialVersion(version) match {
       case Some((2L, 12L)) =>
@@ -93,8 +100,8 @@ object Compilation {
     }
 
   val compilerPlugins = Seq(
-    compilerPlugin("org.spire-math"         %% "kind-projector"  % "0.9.7"),
-    compilerPlugin("com.github.tomasmikula" %% "pascal"          % "0.2.1"),
-    compilerPlugin("com.github.ghik"        %% "silencer-plugin" % silencerVersion)
+    compilerPlugin("org.spire-math" %% "kind-projector" % "0.9.7"),
+    compilerPlugin("com.github.tomasmikula" %% "pascal" % "0.2.1"),
+    compilerPlugin("com.github.ghik" %% "silencer-plugin" % silencerVersion)
   )
 }

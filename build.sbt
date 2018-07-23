@@ -16,7 +16,6 @@ addSbtPlugin("com.dwijnand"       % "sbt-dynver"   % "3.0.0")
 addSbtPlugin("com.dwijnand"       % "sbt-travisci" % "1.1.1")
 addSbtPlugin("com.geirsson"       % "sbt-scalafmt" % "1.6.0-RC3")
 addSbtPlugin("pl.project13.scala" % "sbt-jmh"      % "0.3.3")
+addSbtPlugin("org.wartremover"    % "sbt-wartremover" % "2.2.1")
 
 scalafmtOnCompile := true
-
-wartremoverWarnings in (Compile, compile) ++= Warts.unsafe
