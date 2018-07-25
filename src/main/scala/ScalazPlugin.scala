@@ -4,12 +4,13 @@ import sbt._
 import Keys._
 import de.heikoseeberger.sbtheader.HeaderPlugin
 import org.scalafmt.sbt.ScalafmtPlugin
+import wartremover.WartRemover
 
 object ScalazPlugin extends AutoPlugin {
 
   override def trigger = allRequirements
 
-  override def requires = HeaderPlugin && ScalafmtPlugin
+  override def requires = HeaderPlugin && ScalafmtPlugin && WartRemover
 
   override def buildSettings =
     Compilation.buildSettings ++
@@ -23,5 +24,5 @@ object ScalazPlugin extends AutoPlugin {
       )
 
   override def projectSettings =
-    Compilation.projectSettings
+    Compilation.projectSettings ++ WartRemoverSettings.buildSettings
 }

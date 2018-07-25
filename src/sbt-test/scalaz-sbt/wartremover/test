@@ -1,4 +1,4 @@
 # Verify that the sbt-wartremover plugin is correctly activated
 
 > clean
-> compile
+-> compile
