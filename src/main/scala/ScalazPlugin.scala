@@ -14,6 +14,8 @@ object ScalazPlugin extends AutoPlugin {
 
   override def buildSettings =
     Compilation.buildSettings ++
+      Publication.buildSettings ++
+      Formatting.buildSettings ++
       Seq(
         organization := "org.scalaz",
         organizationName := "Scalaz",

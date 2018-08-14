@@ -12,7 +12,6 @@ object Compilation {
       scalacOptions := stdScalacOptions ++ crossScalacOptions(
         scalaVersion.value
       ),
-      scalafmtOnCompile := true,
       incOptions := incOptions.value.withLogRecompileOnMacro(false)
     )
 
@@ -20,6 +19,9 @@ object Compilation {
     scalacOptions in (Compile, console) --= Seq(
       "-Ywarn-unused:imports",
       "-Xfatal-warnings"
+    ),
+    resolvers ++= Seq(
+      "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
     ),
     libraryDependencies ++= compilerPlugins ++ Seq(
       "com.github.ghik" %% "silencer-lib" % silencerVersion % Provided,
